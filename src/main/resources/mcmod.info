@@ -1,0 +1,16 @@
+[
+{
+  "modid": "EssentialAlchemy",
+  "name": "Essential Alchemy",
+  "description": "",
+  "version": "",
+  "mcversion": "",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["Corilyn"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["Thaumcraft"]
+}
+]
