@@ -26,8 +26,8 @@ public class HealthStone extends EffectBlock {
 		
 		if (eb.isEntityUndead()) // ID 21 is HealthBoost
 			pe = new PotionEffect(21,amped ? 200 : 40,amped ? -3 : -1,amped);
-		else // 20s on players, 10s on others, 2s unboosted
-			pe = new PotionEffect(21,amped ? (eb instanceof EntityPlayer) ? 400 : 200 : 40,amped ?  4 : 0,amped);
+		else // 40s on players, 20s on others, 2s unboosted
+			pe = new PotionEffect(21,amped ? (eb instanceof EntityPlayer) ? 800 : 400 : 40,amped ?  4 : 0,amped);
 		
 		// figure out if the new effect is worth applying over the old one
 		PotionEffect current = eb.getActivePotionEffect(Potion.field_76443_y); // Health Boost Potion (Forge get your damn mapping together)
