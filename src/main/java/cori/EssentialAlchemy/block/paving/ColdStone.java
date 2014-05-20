@@ -3,24 +3,19 @@ package cori.EssentialAlchemy.block.paving;
 import java.awt.Color;
 import java.util.Random;
 
-import cori.EssentialAlchemy.EssentialAlchemy;
-import cori.EssentialAlchemy.tile.TileEffectStone;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockIce;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntitySnowman;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.IAspectContainer;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import cori.EssentialAlchemy.EssentialAlchemy;
 
 public class ColdStone extends EffectBlock {
 

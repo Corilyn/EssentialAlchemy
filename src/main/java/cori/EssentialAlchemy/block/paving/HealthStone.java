@@ -1,13 +1,12 @@
 package cori.EssentialAlchemy.block.paving;
 
-import cori.EssentialAlchemy.tile.TileEffectStone;
+import thaumcraft.api.aspects.Aspect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHealth;
 import net.minecraft.tileentity.TileEntity;
-import thaumcraft.api.aspects.Aspect;
+import cori.EssentialAlchemy.tile.TileEffectStone;
 
 public class HealthStone extends EffectBlock {
 

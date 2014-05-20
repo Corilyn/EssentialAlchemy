@@ -3,16 +3,13 @@ package cori.EssentialAlchemy.block.paving;
 import java.awt.Color;
 import java.util.Collection;
 
-import cori.EssentialAlchemy.EssentialAlchemy;
-import cori.EssentialAlchemy.tile.TileEffectStone;
-
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.IAspectContainer;
+import cori.EssentialAlchemy.tile.TileEffectStone;
 
 public class RegenStone extends EffectBlock {
 

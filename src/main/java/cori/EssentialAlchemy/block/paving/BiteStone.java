@@ -3,16 +3,15 @@ package cori.EssentialAlchemy.block.paving;
 import java.awt.Color;
 import java.util.Random;
 
-import cori.EssentialAlchemy.EssentialAlchemy;
-import cori.EssentialAlchemy.tile.TileEffectStone;
+import thaumcraft.api.aspects.Aspect;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
-
-import thaumcraft.api.aspects.Aspect;
+import cori.EssentialAlchemy.EssentialAlchemy;
+import cori.EssentialAlchemy.tile.TileEffectStone;
 
 public class BiteStone extends EffectBlock {
 

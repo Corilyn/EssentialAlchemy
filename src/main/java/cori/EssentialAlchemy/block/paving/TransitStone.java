@@ -3,21 +3,15 @@ package cori.EssentialAlchemy.block.paving;
 import java.awt.Color;
 import java.util.Random;
 
-import cori.EssentialAlchemy.EssentialAlchemy;
-import cori.EssentialAlchemy.tile.TileEffectStone;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.item.ItemEnderPearl;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.IAspectContainer;
+import cori.EssentialAlchemy.tile.TileEffectStone;
 
 public class TransitStone extends EffectBlock {
 

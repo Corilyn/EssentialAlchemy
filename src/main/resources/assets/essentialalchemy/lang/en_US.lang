@@ -30,7 +30,7 @@ ES.lore.RESISTSTONE=Become as durable as the stone it's made of
 ES.page.RESISTSTONE.1= Your mastery of §1Tutamen§0 has lead you to a stone that buffers you from impacts. Provides §1§lResistance II§0§r for eight seconds normally, but when filled with §1Tutamen§0 it will instead grant §1§lResistance IV§0§r for thirty seconds.
 
 ES.name.REGENSTONE=Paving Stone of Recovery
-ES.lore.REGENSTONE=Modest improvment on bloodletting
+ES.lore.REGENSTONE=Modest improvement on bloodletting
 ES.page.REGENSTONE.1= After some examination, you've taken the healing properties of §cSano§0 and bound them into stone. Will grant §d§lRegen I§0§r for as long as your standing on it, though if topped with §cSano§0 it will briefly restore as if by §d§lRegen V§0§r.
 
 ES.name.TRANSITSTONE=Paving Stone of Transit

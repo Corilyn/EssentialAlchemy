@@ -3,26 +3,22 @@ package cori.EssentialAlchemy.block.paving;
 import java.awt.Color;
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockHopper;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import thaumcraft.api.aspects.Aspect;
 import cori.EssentialAlchemy.EssentialAlchemy;
 import cori.EssentialAlchemy.ITickedByTile;
 import cori.EssentialAlchemy.Lib;
 import cori.EssentialAlchemy.tile.TileEffectStone;
-import thaumcraft.api.aspects.Aspect;
 
 public class SuctionStone extends EffectBlock implements ITickedByTile {
 

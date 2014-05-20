@@ -2,17 +2,12 @@ package cori.EssentialAlchemy.block.paving;
 
 import java.awt.Color;
 import java.util.List;
-import java.util.Random;
 
-import com.ibm.icu.impl.duration.impl.DataRecord.EZeroHandling;
+import thaumcraft.api.aspects.Aspect;
 
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -22,7 +17,6 @@ import net.minecraft.world.World;
 import cori.EssentialAlchemy.EssentialAlchemy;
 import cori.EssentialAlchemy.ITickedByTile;
 import cori.EssentialAlchemy.tile.TileEffectStone;
-import thaumcraft.api.aspects.Aspect;
 
 public class BindStone extends EffectBlock implements ITickedByTile {
 
