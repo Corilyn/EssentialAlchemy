@@ -19,7 +19,7 @@ tile.HealthStone.name=Paving Stone of Vitality
 
 ES.name.ADVPAVING=Arcane Masonary
 ES.lore.ADVPAVING=Essential Flooring Solutions
-ES.page.ADVPAVING.1= Your discovery of essentia distillation has lead you to retouch on your previous advances with Arcane Stone, rather than infusing the stone raw shards, you believe you can achieve a whole host of effects through the use of §lSalis Mundus§o.<LINE>  All of the Advanced paving stones produce amplified effects when fed their respective Essentia types by tubing, but are sure there will be more ways to gather Essentia.<LINE>
+ES.page.ADVPAVING.1= Your discovery of essentia distillation has lead you to retouch on your previous advances with Arcane Stone, rather than infusing the stone raw shards, you believe you can achieve a whole host of effects through the use of §lSalis Mundus§r.<LINE>  All of the Advanced paving stones produce amplified effects when fed their respective Essentia types by tubing, but you are sure there will be more ways to gather Essentia.<LINE>
 
 ES.name.AUGPAVING=Augmented Paving Stones
 ES.lore.AUGPAVING=Boosting Capacties
