@@ -19,44 +19,44 @@ tile.HealthStone.name=Paving Stone of Vitality
 
 ES.name.ADVPAVING=Arcane Masonary
 ES.lore.ADVPAVING=Essential Flooring Solutions
-ES.page.ADVPAVING.1= Your discovery of essentia distillation has lead you to retouch on your previous advances with Arcane Stone, rather than infusing the stone raw shards, you believe you can achieve a whole host of effects through the use of Salis Mundus.<BR>All of the Advanced paving stones produce amplified effects when fed their respective Essentia types by tubing, but are sure there will be more ways to gather Essentia.
+ES.page.ADVPAVING.1= Your discovery of essentia distillation has lead you to retouch on your previous advances with Arcane Stone, rather than infusing the stone raw shards, you believe you can achieve a whole host of effects through the use of §lSalis Mundus§o.<LINE>  All of the Advanced paving stones produce amplified effects when fed their respective Essentia types by tubing, but are sure there will be more ways to gather Essentia.<LINE>
 
 ES.name.AUGPAVING=Augmented Paving Stones
 ES.lore.AUGPAVING=Boosting Capacties
-ES.page.AUGPAVING.1= You've made fantastic progress in discovering a method to augment your paving stones to improve their ability to drain Essentia.<BR>  From now on, you can right click ontop of any §lAdvanced Paving Stone§0 with a §lGold Ingot§0, allowing the stone to draw essentia from afar.
+ES.page.AUGPAVING.1= You've made fantastic progress in discovering a method to augment your paving stones to improve their ability to drain Essentia.<LINE>  From now on, you can right click ontop of any §lAdvanced Paving Stone§0 with a §lGold Ingot§0, allowing the stone to draw essentia from afar.<LINE>
 
 ES.name.RESISTSTONE=Paving Stone of Resistance
 ES.lore.RESISTSTONE=Become as durable as the stone it's made of
-ES.page.RESISTSTONE.1= Your mastery of §1Tutamen§0 has lead you to a stone that buffers you from impacts. Provides §1§lResistance II§0§r for eight seconds normally, but when filled with §1Tutamen§0 it will instead grant §1§lResistance IV§0§r for thirty seconds.
+ES.page.RESISTSTONE.1= Your mastery of §1§lTutamen§0 has lead you to a stone that buffers you from impacts. Provides §1§lResistance II§0§r for eight seconds normally, but when filled with §1§lTutamen§0 it will instead grant §1§lResistance IV§0§r for thirty seconds.<LINE>
 
 ES.name.REGENSTONE=Paving Stone of Recovery
 ES.lore.REGENSTONE=Modest improvement on bloodletting
-ES.page.REGENSTONE.1= After some examination, you've taken the healing properties of §cSano§0 and bound them into stone. Will grant §d§lRegen I§0§r for as long as your standing on it, though if topped with §cSano§0 it will briefly restore as if by §d§lRegen V§0§r.
+ES.page.REGENSTONE.1= After some examination, you've taken the healing properties of §cSano§0 and bound them into stone. Will grant §d§lRegen I§0§r for as long as your standing on it, though if topped with §c§lSano§0 it will briefly restore as if by §d§lRegen V§0§r.<LINE>
 
 ES.name.TRANSITSTONE=Paving Stone of Transit
 ES.lore.TRANSITSTONE=Endermen's Favorite
-ES.page.TRANSITSTONE.1= §5Alienis§0's unusual properties make it one of the harder essences to contain, but you eventually manage to coax into binding it into the stone. When any living creature sets foot on it, it is violently displaced in the direction it's looking as if by Enderpearl, though the jump can be made significantly less jarring if coupled with a Feather Falling enchantment.<BR>It's paltry range of two blocks can be overcome by empowering it with §5Alienis§0, which boost it's range to a respectable eight blocks.
+ES.page.TRANSITSTONE.1= §5Alienis§0's unusual properties make it one of the harder essences to contain, but you eventually manage to coax into binding it into the stone. When any living creature sets foot on it, it is violently displaced in the direction it's looking as if by Enderpearl, though the jump can be made significantly less jarring if coupled with a Feather Falling enchantment.<LINE>  It's paltry range of two blocks can be overcome by empowering it with §5Alienis§0, which boost it's range to a respectable eight blocks.
 
 ES.name.COLDSTONE=Paving Stone of Frost
 ES.lore.COLDSTONE=As Cold as Ice
-ES.page.COLDSTONE.1= §8Gelum§0 has been proving hard to handle for entirely different reasons, not the least of which you believe is your stark lack of mittens. Otherwise, you've manage to bind it into a stone for a number of effects.<BR>Firstly, it chills the air around it condensing snow. Secondly, it will freeze water in it's vincinity. Thirdly, the speed and range of the frost is amplified via §8Gelum§0. It seems the slick surface also impedes mob jumping, perhaps you can make use of that.
+ES.page.COLDSTONE.1= §8§lGelum§0 has been proving hard to handle for entirely different reasons, not the least of which you believe is your stark lack of mittens. Otherwise, you've manage to bind it into a stone for a number of effects.<LINE>  Firstly, it chills the air around it condensing snow. Secondly, it will freeze water in it's vincinity. Thirdly, the speed and range of the frost is amplified via §8§lGelum§0. It seems the slick surface also impedes mob jumping, perhaps you can make use of that.
 
 ES.name.SUCKSTONE=Paving Stone of Suction
 ES.lore.SUCKSTONE=Less Sucky than it sounds
-ES.page.SUCKSTONE.1= Your toying with the void essences has lead you on to a rather unusual type of stone that pulls the air in around it.<BR>Placing this stone down it will an item in the immediate vincinity towards it, holding them in place. §8Vacous§0 will drastically help improve it's paltry reach. It has the additional function of, if there is an inventory above it, the item it draws in will be shunted into the inventory. You suspect it might be good for putting any of your reagents back that fall off - or just for clearing clutter.
+ES.page.SUCKSTONE.1= Your toying with the void essences has lead you on to a rather unusual type of stone that pulls the air in around it.<LINE>Placing this stone down it will attract an item in the immediate vincinity towards it, holding it in place. §8§lVacous§0 will drastically help improve it's paltry reach. It has the additional function of, if there is an inventory above it, the item it draws in will be shunted into the inventory. You suspect it might be good for putting any of your reagents back that fall off - or just for clearing clutter.
 
 ES.name.VENOMSTONE=Paving Stone of Poison
 ES.lore.VENOMSTONE=If Cave Spiders weren't bad enough
-ES.page.VENOMSTONE.1= If nothing else, it's been your careful handling §2Venenum§0 that's gotten you this far, though that probably wasn't what you were thinking when you came up with this apparent deathtrap.<BR> This stone will actively poison any living creature that happens upon it, hopefuly enough to deter them from going any further. If fueled with §2Venenum§0 the poison becomes that much more vicious.
+ES.page.VENOMSTONE.1= If nothing else, it's been your careful handling §2§lVenenum§0 that's gotten you this far, though that probably wasn't what you were thinking when you came up with this apparent deathtrap.<LINE> This stone will actively poison any living creature that happens upon it, hopefuly enough to deter them from going any further. If fueled with §2§lVenenum§0 the poison becomes that much more vicious.<LINE>
 
 ES.name.BINDSTONE=Paving Stone of Binding
 ES.lore.BINDSTONE=An Arcane Beartrap
-ES.page.BINDSTONE.1= Most good Thaumaturges know that few substances are as plainly obnoxious to deal with a §l§4Vinculum§0§r, however the one positive trait you've discovered is it binds comparitively easily to stone.<BR>  This stone aggressively hampers any creature trying to move over it, slowing them to a snails pace. When supplied with a source of §l§4Vinculum§0§r it will active seek out and bind nearby mobs in place - Just make sure to deal with them before it runs out.
+ES.page.BINDSTONE.1= Most good Thaumaturges know that few substances are as plainly obnoxious to deal with as §l§4Vinculum§0§r, however the one positive trait you've discovered is it binds comparitively easily to stone.<LINE>  This stone aggressively hampers any creature trying to move over it, slowing them to a snails pace. When supplied with a source of §l§4Vinculum§0§r it will active seek out and bind any aggressive monsters in place - Just make sure to deal with them before it runs out.<LINE>
 
 ES.name.BITESTONE=Paving Stone of Biting
 ES.lore.BITESTONE=Did that stone just bite me?
-ES.page.BITESTONE.1= §4§lTelum§0§r wasn't particularly inclined to bind with stone without lashing out, but you eventually embrace that and come up with a design that embraces that.<BR>  This stone actively weakens the armor of anyone unfortainate enough to walk over it, causing them to take additional damage. It's true potential shines when it is fed §4§lTelum§0§r, causing it viciously lash out damaging anything upon it. 
+ES.page.BITESTONE.1= §4§lTelum§0§r wasn't particularly inclined to bind with stone without lashing out, but you eventually embrace that and come up with a design that embraces that.<LINE>  This stone actively weakens the armor of anyone unfortainate enough to walk over it, causing them to take additional damage. It's true potential shines when it is fed §4§lTelum§0§r, causing it viciously lash out damaging anything upon it.<LINE> 
 
 ES.name.LIFESTONE=Paving Stone of Vitality
 ES.lore.LIFESTONE=Crushing life beneath your feet
-ES.page.LIFESTONE.1= §c§lVictus§0, the Essence of life proved atypically easy to imbue into stone, due in no small part to it's natural tendency to breathe life into this.<BR>  This stone provides a minor health boost, and reacts much more violently towards undead, reducing maximum health of any undead that pass over it. When fed with §c§lVictus§0 the effects are strongly magnified, reducing most undead to minimal health and providing a §c§lHealth Boost V§0 bonus to anyone living.
+ES.page.LIFESTONE.1= §c§lVictus§0, the Essence of life proved atypically easy to imbue into stone, due in no small part to it's natural tendency to breathe life into this.<LINE>  This stone provides a minor health boost, and reacts much more violently towards undead, reducing maximum health of any undead that pass over it. When fed with §c§lVictus§0 the effects are strongly magnified, reducing most undead to minimal health and providing a §c§lHealth Boost V§0 bonus to anyone living.
