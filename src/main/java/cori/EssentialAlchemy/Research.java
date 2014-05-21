@@ -78,7 +78,7 @@ public class Research {
 				ThaumcraftApi.addArcaneCraftingRecipe(
 						KeyLib.PAVING_SUCK, 
 						new ItemStack(EssentialAlchemy.SuckStone,4), 
-						ofPrimals(10, 0, 0, 0, 0, 10), 
+						ofPrimals(10, 0, 0, 0, 10, 0), 
 						"aba", "aca", 'a',ArcaneBrick, 'b',SalisMundis, 'c', new ItemStack(Blocks.chest)));
 		
 		recipes.put(KeyLib.PAVING_VENOM, 
