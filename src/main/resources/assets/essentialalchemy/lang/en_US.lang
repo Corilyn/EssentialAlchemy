@@ -46,6 +46,8 @@ ES.name.ESBREW_TUTAMEN=Tutamen Brewing
 ES.lore.ESBREW_TUTAMEN=Resistance
 ES.name.ESBREW_EXANIMIS=Exanimis Brewing
 ES.lore.ESBREW_EXANIMIS=Weakness
+ES.name.ESBREW_SPIRITUS=Spiritus Brewing
+ES.lore.ESBREW_SPIRITUS=Fatigue
 
 # --- Category
 tc.research_category.ESSALC=Essential Alchemy

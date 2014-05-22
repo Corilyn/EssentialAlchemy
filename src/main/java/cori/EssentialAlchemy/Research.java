@@ -126,8 +126,8 @@ public class Research {
 				CATEGORY, 
 				new AspectList()
 					.add(Aspect.WATER, 4), 
-				-5, 
-				-6, 
+				-1, 
+				-3, 
 				1, 
 				icon)
 			.setRound()
@@ -170,7 +170,7 @@ public class Research {
 				CATEGORY, 
 				new AspectList().add(Aspect.GREED, 4).add(Aspect.TRAVEL, 4).add(Aspect.VOID, 6), 
 				-1, 
-				-2, 
+				2, 
 				2, 
 				new ItemStack(Items.gold_ingot))
 			.setParents(KeyLib.ADVANCED_PAVING, "JARVOID")

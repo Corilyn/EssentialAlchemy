@@ -18,9 +18,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.command.CommandGive;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
@@ -46,11 +48,13 @@ public class ArcanePotion extends ItemPotion {
 	public ArcanePotion() {
 		super();
 		iconString="potion";
+		hasSubtypes = false; // Don't list subtypes in tabs
+		setCreativeTab(EssentialAlchemy.thaumTab);
 	}
 	
 	public static void initAssociation() {
 		Assocations.put(Aspect.HUNGER, Potion.hunger);
-		Assocations.put(Aspect.DEATH, Potion.wither);
+		Assocations.put(Aspect.DEATH, Potion.potionTypes[20]); // Wither
 		Assocations.put(Aspect.WEAPON, Potion.harm);
 		Assocations.put(Aspect.FLIGHT, Potion.jump);
 		Assocations.put(Aspect.ARMOR, Potion.resistance);
@@ -71,7 +75,7 @@ public class ArcanePotion extends ItemPotion {
 		Assocations.put(Aspect.SENSES, Potion.nightVision);
 		Assocations.put(Aspect.GREED, Potion.potionTypes[22]); // Absorption
 		Assocations.put(Aspect.BEAST, Potion.potionTypes[21]); // Health Boost
-		Assocations.put(Aspect.DEATH, Potion.digSlowdown);
+		Assocations.put(Aspect.SOUL, Potion.digSlowdown);
 		Assocations.put(Aspect.ELDRITCH, Potion.confusion);
 		
 		// Build the reverse list
@@ -79,10 +83,21 @@ public class ArcanePotion extends ItemPotion {
 			ReverseAssocations.put(Assocations.get(a).getId(), a);
 	}
 	
+	// Pretend not to have sub items
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int SomeNonsense) {
+	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_,
+			List l) {
+		return;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getColorFromItemStack(ItemStack stack, int pass) {
+		if (pass != 0) return 0xFFFFFF; // Draw the bottle as white
+		
 		List Effects = getEffects(stack);
+		if (e == null) return 0xFFFFFF;
 		for (Object e : Effects) {
 			PotionEffect pe = (PotionEffect)e;
 				
@@ -91,7 +106,7 @@ public class ArcanePotion extends ItemPotion {
 				return ReverseAssocations.get(id).getColor();
 		}
 		
-		return super.getColorFromItemStack(stack, SomeNonsense);
+		return super.getColorFromItemStack(stack, pass);
 	}
 	
 	public static String getKey(Aspect a) {
@@ -113,8 +128,8 @@ public class ArcanePotion extends ItemPotion {
 		
 		Set<Aspect> keys = Assocations.keySet();
 		
+		int startCol = -3;
 		int startRow = -4;
-		int startCol = -4;
 		int at = 0;
 		
 		ItemStack bottle = new ItemStack(Items.glass_bottle);
@@ -123,8 +138,16 @@ public class ArcanePotion extends ItemPotion {
 			// Get an aspect list of eight of these
 			AspectList al = new AspectList(); al.add(a, 8);
 			
-			int row = startRow + at/3;
-			int col = startCol + at%3;
+			
+			int row = startRow + at/4;
+			int col = startCol - at%4;
+			// Avoid drawing over the master icon
+			if (row == -1 && col == -3) {
+				++at;
+				row = startRow + at/4;
+				col = startCol - at%4;
+			}
+			// Increment draw slot
 			++at;
 			
 			ItemStack stack = getStackFor(a);
@@ -153,9 +176,13 @@ public class ArcanePotion extends ItemPotion {
 		}
 	}
 	
+	public static boolean useVanillaWhenPossible = false;
+	
 	private static ItemStack getStackFor(Aspect a) {
 		int effectID = Assocations.get(a).id;
 		// Handle any vanilla potions first
+		
+		if (useVanillaWhenPossible)
 		switch (effectID) {
 			case 10: // Regen
 				return new ItemStack(EssentialAlchemy.ArcanePotion,1,8193);
@@ -185,22 +212,48 @@ public class ArcanePotion extends ItemPotion {
 		
 		ItemStack is = new ItemStack(EssentialAlchemy.ArcanePotion, 1, 16);
 		NBTTagCompound tag = null;
+		int amp = 0;
+		int dur = 1200;
+		
+		// Handle cases where the default duration should be longer
+		switch (effectID) {
+			case 1: // Speed
+			case 2: // Slowness
+			case 4: // Fatigue
+			case 8: // Jump
+			case 9: // Nausea
+			case 11: // Resistance
+			case 12: // Fire Resist
+			case 15: // Blindness
+			case 16: // Night Vision
+			case 17: // Hunger
+			case 21: // Health Boost
+				dur *= 2; // 2m
+		}
+		
+		String json = "{CustomPotionEffects:[";
+		//json += "{Id:"+effectID+",Amplifier:"+amp+",Duration:"+dur+"}";
+		json += effectToJSON(new PotionEffect(effectID, dur, amp));
+		
+		json += "]}";
 		
 		try {
-			tag = (NBTTagCompound) 
-			JsonToNBT.func_150315_a(
-				"{CustomPotionEffects:[{Id:"+effectID+"Amplifier:1,Duration:1200}]}");
+			tag = (NBTTagCompound) JsonToNBT.func_150315_a(json);
 		} catch (NBTException e) {
 			EssentialAlchemy.lg.warn("Encountered Error generating potion ID " + effectID);
 			e.printStackTrace();
 		}
 		
-		if (tag != null)
-			is.setTagCompound(tag);
+		//if (tag != null)
+		is.setTagCompound(tag);
 		
 		return is;
 	}
-
+	
+	private static String effectToJSON(PotionEffect pe) {
+		return "{Id:"+pe.getPotionID()+",Amplifier:"+pe.getAmplifier()+",Duration:"+pe.getDuration()+"}";
+	}
+	
 	// Denote that this is was an Essential Alchemy potion
 	@Override
 	@SideOnly(Side.CLIENT)
