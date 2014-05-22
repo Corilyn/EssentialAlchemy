@@ -3,6 +3,8 @@ package cori.EssentialAlchemy;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import cori.EssentialAlchemy.potions.ArcanePotion;
+
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -117,6 +119,25 @@ public class Research {
 		ResearchCategories.registerCategory(CATEGORY, icon, background);
 		
 		ResearchItem r;
+		
+		// Essential Brewing
+		r = new EssentialResearchItem(
+				KeyLib.ESS_BREWING,
+				CATEGORY, 
+				new AspectList()
+					.add(Aspect.MAGIC, 4)
+					.add(Aspect.WATER, 6)
+					.add(Aspect.EXCHANGE, 4), 
+				-5, 
+				-6, 
+				2, 
+				icon)
+			.setRound()
+			/*.setSiblings(ArcanePotion.getKey(Aspect.HUNGER))*/
+			.setPages(new ResearchPage("ES.page.ESSBREW.1"))
+			.registerResearchItem();
+		
+		ArcanePotion.register();
 		
 		// Advanced Paving
 		r = new EssentialResearchItem(

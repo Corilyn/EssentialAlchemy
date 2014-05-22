@@ -14,5 +14,7 @@ public class KeyLib {
 	public static String PAVING_BITE = "BITESTONE";
 	public static String PAVING_LIFE = "LIFESTONE";
 	
+	public static String ESS_BREWING = "ESSBREW";
+	
 	public static String KEY_CRYSTAL_FOCUS = "CRYSTALFOCUS";
 }

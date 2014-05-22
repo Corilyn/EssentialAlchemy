@@ -20,9 +20,9 @@ tile.HealthStone.name=Paving Stone of Vitality
 
 # --- Research
 
-ES.name.ADVPAVING=Essentia Brewing
-ES.lore.ADVPAVING=Who doesn't want to drink Essentia
-ES.page.ADVPAVING.1= Many a mage has had the inclination to partake in Essentia, however consuming the raw essences invariably proves disasterous for ones digestive tract, leading many to give up after the first handful of manabeans. After some reflection, however, the thought occurs to try bottling it.<LINE>The various formula of potions is a tricky subject, and requires advanced knowledge on the aspects in question - nothing you can't resolve through scanning.
+ES.name.ESSBREW=Essentia Brewing
+ES.lore.ESSBREW=Who doesn't want to drink Essentia
+ES.page.ESSBREW.1= Many a mage has had the inclination to partake in Essentia, however consuming the raw essences invariably proves disasterous for ones digestive tract, leading many to give up after the first handful of manabeans. After some reflection, however, the thought occurs to try bottling it.<LINE>The various formula of potions is a tricky subject, and requires advanced knowledge on the aspects in question - nothing you can't resolve through scanning.
 
 ES.name.ADVPAVING=Arcane Masonary
 ES.lore.ADVPAVING=Essential Flooring Solutions

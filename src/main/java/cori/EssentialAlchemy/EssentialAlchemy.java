@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
@@ -45,6 +46,7 @@ public class EssentialAlchemy
     	ProtectStone, RegenStone, TransitStone, ColdStone, 
     	SuckStone, VenomStone, BindStone, BiteStone, HealthStone;
     //public static Block ;
+	public static Item ArcanePotion;
     
     @EventHandler
     public void init(FMLInitializationEvent event)
