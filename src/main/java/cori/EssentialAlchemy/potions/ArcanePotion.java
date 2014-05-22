@@ -41,6 +41,12 @@ import thaumcraft.api.research.ResearchPage;
 public class ArcanePotion extends ItemPotion {
 	//public Aspect Type;
 	public static Map<Aspect,Potion> Assocations = new HashMap<Aspect, Potion>();
+	public static Map<Integer,Aspect> ReverseAssocations = new HashMap<Integer, Aspect>(); // for getting color
+	
+	public ArcanePotion() {
+		super();
+		iconString="potion";
+	}
 	
 	public static void initAssociation() {
 		Assocations.put(Aspect.HUNGER, Potion.hunger);
@@ -49,7 +55,7 @@ public class ArcanePotion extends ItemPotion {
 		Assocations.put(Aspect.FLIGHT, Potion.jump);
 		Assocations.put(Aspect.ARMOR, Potion.resistance);
 		Assocations.put(Aspect.DARKNESS, Potion.blindness);
-		Assocations.put(Aspect.LIGHT, Potion.nightVision);
+		//Assocations.put(Aspect.LIGHT, Potion.nightVision);
 		Assocations.put(Aspect.ENERGY, Potion.damageBoost);
 		Assocations.put(Aspect.UNDEAD, Potion.weakness);
 		Assocations.put(Aspect.TRAP, Potion.moveSlowdown);
@@ -67,6 +73,25 @@ public class ArcanePotion extends ItemPotion {
 		Assocations.put(Aspect.BEAST, Potion.potionTypes[21]); // Health Boost
 		Assocations.put(Aspect.DEATH, Potion.digSlowdown);
 		Assocations.put(Aspect.ELDRITCH, Potion.confusion);
+		
+		// Build the reverse list
+		for(Aspect a : Assocations.keySet()) 
+			ReverseAssocations.put(Assocations.get(a).getId(), a);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getColorFromItemStack(ItemStack stack, int SomeNonsense) {
+		List Effects = getEffects(stack);
+		for (Object e : Effects) {
+			PotionEffect pe = (PotionEffect)e;
+				
+			int id = pe.getPotionID();
+			if (ReverseAssocations.containsKey(id))
+				return ReverseAssocations.get(id).getColor();
+		}
+		
+		return super.getColorFromItemStack(stack, SomeNonsense);
 	}
 	
 	public static String getKey(Aspect a) {
@@ -98,8 +123,9 @@ public class ArcanePotion extends ItemPotion {
 			// Get an aspect list of eight of these
 			AspectList al = new AspectList(); al.add(a, 8);
 			
-			int row = startRow + at/5;
-			int col = startCol + at%5;
+			int row = startRow + at/3;
+			int col = startCol + at%3;
+			++at;
 			
 			ItemStack stack = getStackFor(a);
 			// Register the recipe
@@ -118,11 +144,10 @@ public class ArcanePotion extends ItemPotion {
 					col,
 					1,
 					stack)
-				.setParentsHidden(KeyLib.ESS_BREWING)
+				//.setParentsHidden(KeyLib.ESS_BREWING)
 				.setHidden()
 				.setAspectTriggers(a)
 				.setSecondary()
-				.setConcealed()
 				.setPages(new ResearchPage(recipe))
 				.registerResearchItem();
 		}
@@ -164,7 +189,7 @@ public class ArcanePotion extends ItemPotion {
 		try {
 			tag = (NBTTagCompound) 
 			JsonToNBT.func_150315_a(
-				"{CustomPotionEffects:[{Id:"+effectID+"Amplifier:1,Duration:1200}]}}");
+				"{CustomPotionEffects:[{Id:"+effectID+"Amplifier:1,Duration:1200}]}");
 		} catch (NBTException e) {
 			EssentialAlchemy.lg.warn("Encountered Error generating potion ID " + effectID);
 			e.printStackTrace();

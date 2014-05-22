@@ -1,6 +1,52 @@
 ﻿# -- Items
 ES.mouseoverArcanePotion=Essence Potion
 
+# -- Potions
+ES.name.ESBREW_GELUM=Gelum Brewing
+ES.lore.ESBREW_GELUM=Fire Resistance
+ES.name.ESBREW_HUMANUS=HumanUs Brewing
+ES.lore.ESBREW_HUMANUS=Saturation
+ES.name.ESBREW_VOLATUS=Volatus Brewing
+ES.lore.ESBREW_VOLATUS=Jump Boost
+ES.name.ESBREW_TENEBRAE=Tenebrae Brewing
+ES.lore.ESBREW_TENEBRAE=Blindness
+ES.name.ESBREW_SANO=Sano Brewing
+ES.lore.ESBREW_SANO=Regeneration
+ES.name.ESBREW_VICTUS=Victus Brewing
+ES.lore.ESBREW_VICTUS=Instant Health
+ES.name.ESBREW_POTENTIA=Potentia Brewing
+ES.lore.ESBREW_POTENTIA=Strength Boost
+ES.name.ESBREW_VINCULUM=Vinculum Brewing
+ES.lore.ESBREW_VINCULUM=Slowness
+ES.name.ESBREW_LUCRUM=Lucrum Brewing
+ES.lore.ESBREW_LUCRUM=Absorbtion
+ES.name.ESBREW_MOTUS=Motus Brewing
+ES.lore.ESBREW_MOTUS=Speed Boost
+ES.name.ESBREW_VENENUM=Venenum Brewing
+ES.lore.ESBREW_VENENUM=Poison
+ES.name.ESBREW_ALIENIS=Alienis Brewing
+ES.lore.ESBREW_ALIENIS=Naseua
+ES.name.ESBREW_TELUM=Telum Brewing
+ES.lore.ESBREW_TELUM=Damage Boost
+ES.name.ESBREW_BESTIA=Bestia Brewing
+ES.lore.ESBREW_BESTIA=Health Boost
+ES.name.ESBREW_PERFODIO=Perfodio Brewing
+ES.lore.ESBREW_PERFODIO=Mining Haste
+ES.name.ESBREW_FAMES=Fames Brewing
+ES.lore.ESBREW_FAMES=Hunger
+ES.name.ESBREW_SENSUS=Sensus Brewing
+ES.lore.ESBREW_SENSUS=Nightvision
+ES.name.ESBREW_VACUOS=Vacuos Brewing
+ES.lore.ESBREW_VACUOS=Water Breathing
+ES.name.ESBREW_AURAM=Auram Brewing
+ES.lore.ESBREW_AURAM=Invisibility
+ES.name.ESBREW_MORTUUS=Mortuus Brewing
+ES.lore.ESBREW_MORTUUS=Wither
+ES.name.ESBREW_TUTAMEN=Tutamen Brewing
+ES.lore.ESBREW_TUTAMEN=Resistance
+ES.name.ESBREW_EXANIMIS=Exanimis Brewing
+ES.lore.ESBREW_EXANIMIS=Weakness
+
 # --- Category
 tc.research_category.ESSALC=Essential Alchemy
 
@@ -38,7 +84,7 @@ ES.page.RESISTSTONE.1= Your mastery of §1§lTutamen§0 has lead you to a stone 
 
 ES.name.REGENSTONE=Paving Stone of Recovery
 ES.lore.REGENSTONE=Modest improvement on bloodletting
-ES.page.REGENSTONE.1= After some examination, you've taken the healing properties of §cSano§0 and bound them into stone. Will grant §d§lRegen I§0§r for as long as your standing on it, though if topped with §c§lSano§0 it will briefly restore as if by §d§lRegen V§0§r.<LINE>
+ES.page.REGENSTONE.1= After some examination, you've taken the healing properties of §cSano§0 and bound them into stone. Will grant §d§lRegen I§0§r for as long as you're standing on it, though if topped with §c§lSano§0 it will briefly restore as if by §d§lRegen V§0§r.<LINE>
 
 ES.name.TRANSITSTONE=Paving Stone of Transit
 ES.lore.TRANSITSTONE=Endermen's Favorite

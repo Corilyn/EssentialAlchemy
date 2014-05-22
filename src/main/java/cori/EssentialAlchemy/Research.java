@@ -125,14 +125,13 @@ public class Research {
 				KeyLib.ESS_BREWING,
 				CATEGORY, 
 				new AspectList()
-					.add(Aspect.MAGIC, 4)
-					.add(Aspect.WATER, 6)
-					.add(Aspect.EXCHANGE, 4), 
+					.add(Aspect.WATER, 4), 
 				-5, 
 				-6, 
-				2, 
+				1, 
 				icon)
 			.setRound()
+			.setSecondary()
 			/*.setSiblings(ArcanePotion.getKey(Aspect.HUNGER))*/
 			.setPages(new ResearchPage("ES.page.ESSBREW.1"))
 			.registerResearchItem();
