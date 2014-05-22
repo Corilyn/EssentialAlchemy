@@ -1,4 +1,7 @@
-﻿# --- Category
+﻿# -- Items
+ES.mouseoverArcanePotion=Essence Potion
+
+# --- Category
 tc.research_category.ESSALC=Essential Alchemy
 
 # --- Tile Names
