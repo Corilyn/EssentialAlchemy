@@ -97,7 +97,7 @@ public class ArcanePotion extends ItemPotion {
 		if (pass != 0) return 0xFFFFFF; // Draw the bottle as white
 		
 		List Effects = getEffects(stack);
-		if (e == null) return 0xFFFFFF;
+		if (Effects == null) return 0xFFFFFF;
 		for (Object e : Effects) {
 			PotionEffect pe = (PotionEffect)e;
 				
