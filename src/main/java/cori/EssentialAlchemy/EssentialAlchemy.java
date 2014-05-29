@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import cori.EssentialAlchemy.block.paving.VenomStone;
+import cori.EssentialAlchemy.client.GuiHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
@@ -24,8 +25,11 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import cori.EssentialAlchemy.Net.PacketHandler;
 
 @Mod(modid = EssentialAlchemy.MODID, version = EssentialAlchemy.VERSION,dependencies="required-after:Thaumcraft")
 public class EssentialAlchemy
@@ -45,12 +49,17 @@ public class EssentialAlchemy
     public static Block 
     	ProtectStone, RegenStone, TransitStone, ColdStone, 
     	SuckStone, VenomStone, BindStone, BiteStone, HealthStone;
-    //public static Block ;
+    public static Block PotionModifier;
 	public static Item ArcanePotion;
     
+	public static final PacketHandler packetPipe = new PacketHandler();
+	
     @EventHandler
     public void init(FMLInitializationEvent event)
     {	
+    	packetPipe.init();
+    	packetPipe.registerPacket(ModifierCyclePacket.class);
+    	
     	try {
     		Class thaum = Class.forName("thaumcraft.common.Thaumcraft");
     		thaumTab = (CreativeTabs) thaum.getField("tabTC").get(null);
@@ -61,6 +70,7 @@ public class EssentialAlchemy
     	}
     	
     	proxy.RegisterBlocks();
+    	NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
     	//ResistStone.initStones();
     	
     }
@@ -68,6 +78,8 @@ public class EssentialAlchemy
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
+    	packetPipe.finalizeInit();
+    	
     	Research.registerRecipes();
     	Research.registerPages();
     }

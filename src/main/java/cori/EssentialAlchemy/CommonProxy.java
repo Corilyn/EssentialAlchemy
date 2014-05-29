@@ -1,14 +1,18 @@
 package cori.EssentialAlchemy;
 
 import thaumcraft.api.ThaumcraftApi;
+import thaumcraft.common.Thaumcraft;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.world.World;
 import cori.EssentialAlchemy.block.*;
 import cori.EssentialAlchemy.block.paving.*;
 
-import cori.EssentialAlchemy.tile.TileEffectStone;
+import cori.EssentialAlchemy.potions.PotionModifier;
 import cori.EssentialAlchemy.tile.TileCrystalFocus;
+import cori.EssentialAlchemy.tile.TilePotionModifier;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
@@ -21,10 +25,15 @@ public class CommonProxy {
 	public void RegisterBlocks() {
 		GameRegistry.registerTileEntity(TileEffectStone.class, "TileStoneBuff");
 		GameRegistry.registerTileEntity(TileCrystalFocus.class,"TileCrystalFocus");
+		GameRegistry.registerTileEntity(TilePotionModifier.class, "TilePotionModifier");
 		
 		// Crystal Focus
 		Block crystalFocus = new CrystalFocus();
 		GameRegistry.registerBlock(crystalFocus, "CrystalFocus");
+		
+		// Potion Modifier
+		EssentialAlchemy.PotionModifier = new PotionModifier(Material.rock);
+		GameRegistry.registerBlock(EssentialAlchemy.PotionModifier, "PotionModifier");
 		
 		// Paving stones
 		

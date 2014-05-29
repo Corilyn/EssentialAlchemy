@@ -7,10 +7,11 @@ import net.minecraft.tileentity.TileEntityEnchantmentTable;
 import net.minecraft.world.World;
 import cori.EssentialAlchemy.CommonProxy;
 import cori.EssentialAlchemy.EssentialAlchemy;
+import cori.EssentialAlchemy.block.paving.TileEffectStone;
 import cori.EssentialAlchemy.render.CrystalFocusBlockRender;
 import cori.EssentialAlchemy.render.PavingGlow;
 import cori.EssentialAlchemy.render.PavingStoneRender;
-import cori.EssentialAlchemy.tile.TileEffectStone;
+import cori.EssentialAlchemy.render.PotionModifierRenderer;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -29,8 +30,10 @@ public class ClientProxy extends CommonProxy {
 		FMLClientHandler.instance().getClient().effectRenderer.addEffect(fx);
 	}
 	
-	public static int crystalFocusRenderType;
-	public static int pavingStoneRenderType;
+	public static int 
+		crystalFocusRenderType,
+		pavingStoneRenderType,
+		potionModifierRenderType;
 	
 	@Override
 	public void RegisterBlocks() {
@@ -41,6 +44,9 @@ public class ClientProxy extends CommonProxy {
 		
 		pavingStoneRenderType = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(pavingStoneRenderType, new PavingStoneRender());
+		
+		potionModifierRenderType = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(potionModifierRenderType, new PotionModifierRenderer());
 		
 		TileEntitySpecialRenderer glowInstance = new PavingGlow();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEffectStone.class, glowInstance);

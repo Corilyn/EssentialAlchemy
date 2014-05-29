@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,7 +32,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -52,6 +55,255 @@ public class ArcanePotion extends ItemPotion {
 		setCreativeTab(EssentialAlchemy.thaumTab);
 	}
 	
+	boolean shouldConsume(EntityPlayer p) {
+		return true;
+	}
+	
+	ItemStack modifyPreConsume(EntityPlayer p, ItemStack stack) {
+		return stack;
+	}
+	
+	@Override
+	public ItemStack onEaten(ItemStack stack, World w,
+			EntityPlayer player) {
+		if (!player.capabilities.isCreativeMode && shouldConsume(player))
+			--stack.stackSize;
+
+		if (!w.isRemote)
+		{
+			List list = this.getEffects(stack);
+
+			if (list != null)
+			{
+				Iterator iterator = list.iterator();
+
+				while (iterator.hasNext())
+				{
+					PotionEffect potioneffect = (PotionEffect)iterator.next();
+					player.addPotionEffect(new PotionEffect(potioneffect));
+				}
+			}
+		}
+
+		if (!player.capabilities.isCreativeMode)
+		{
+			if (stack.stackSize <= 0)
+				return new ItemStack(Items.glass_bottle);
+
+			player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
+		}
+
+		return stack;
+	}
+	
+	// 0 - Amplify (0x1)
+	// 1 - Corrupt (0x2)
+	// 2 - Extend  (0x4)
+	// 3 - Mix (?) (0x8)
+	// 4 - Splash  (0x10)
+	public static int getModifierMask(ItemStack stack) {
+		if (stack == null) return 0;
+		Item item = stack.getItem();
+		
+		int mask = 0;
+		
+		if (item instanceof ArcanePotion) {
+			ItemPotion ip = ((ItemPotion)item);
+			List<PotionEffect> Effects = ip.getEffects(stack);
+			if (Effects.size() > 1) return 0; // Mixed Potions can't be remixed
+			
+			PotionEffect effect = Effects.get(0);
+			
+			int id = effect.getPotionID();
+			int amp = effect.getAmplifier();
+			int dur = effect.getDuration();
+			
+			int ampBase = getAmplifier(id);
+			int durBase = getDuration(id);
+			
+			// Only allow amping of amplifiable potions
+			switch (id) {
+				case 9: // Nasuea
+				case 12: // Fire Resist
+				case 13: // Water Breathing
+				case 14: // Invis
+				case 15: // Blindness
+				case 16: // Night Vision
+					break;
+				default:
+					if (amp < ((ampBase+1)*3)) mask |= 0x1;
+			}
+			
+			mask |= 0x2; // Everything is corruptable
+			
+			// Don't allow extending Instant potions
+			switch(id) {
+				case 6:
+				case 7:
+					break;
+				default:
+					if (dur < (durBase * 3)) mask |= 0x4;
+			}
+			
+			
+			if (!ItemPotion.isSplash(stack.getItemDamage())) mask |= 0x10;
+		}
+		
+		return mask;
+	}
+	
+	public static AspectList toModify(int modifier, ItemStack stack) {
+		AspectList al = new AspectList();
+		
+		if (modifier == 4) { // splashify
+			al.add(Aspect.ENTROPY, 4);
+			return al;
+		}
+		
+		if (modifier == 1) { // Corrupt
+			al.add(Aspect.TAINT,2);
+			return al;
+		}
+		
+		ItemPotion potion = (ItemPotion) stack.getItem();
+		List<PotionEffect> effects = potion.getEffects(stack);
+		PotionEffect effect = effects.get(0);
+		
+		int id = effect.getPotionID();
+		
+		// Amplify / Extend
+		if (modifier == 0 || modifier == 2) {
+			// figure out the number of times this potion has been enhanced
+			int currentLevel = 0;
+			
+			// times amplified
+			int ampLevel = effect.getAmplifier();
+			
+			if (ampLevel > getAmplifier(id)) ++currentLevel;
+			if (ampLevel > (getAmplifier(id))+2) ++currentLevel;
+			
+			int durLevel = effect.getDuration();
+			int baseDir = getDuration(id);
+			if (durLevel > baseDir) ++currentLevel;
+			if (durLevel > baseDir * 3) ++currentLevel;
+			
+			int[] costs = new int[] { 8, 16, 24, 32, 48, 64 };
+			al.add(ReverseAssocations.get(id), costs[currentLevel]);
+		}
+		
+		return al;
+	}
+	
+	public static ItemStack applyModifer(int modifier, ItemStack stack) {
+		ItemPotion potion = (ItemPotion) stack.getItem();
+		List<PotionEffect> effects = potion.getEffects(stack);
+		PotionEffect effect = effects.get(0);
+		
+		NBTTagCompound comp = new NBTTagCompound();
+		NBTTagList customEffects = new NBTTagList();
+		NBTTagCompound efTag = new NBTTagCompound();
+		
+		int id = effect.getPotionID();
+		int effAmp = effect.getAmplifier();
+		int effDur = effect.getDuration();
+		boolean ambient = effect.getIsAmbient();
+		
+		// Amplify
+		if (modifier == 0)
+			effAmp += getAmplifier(id) + 1;
+		
+		if (modifier == 1) // Corrupt
+			switch(id) { // Corruption table
+				case 1: id = 2; break; // Swap Speed/Slow
+				case 2: id = 1; break; 
+				case 3: id = 4; break; // Swap Haste/Fatigue
+				case 4: id = 3; break;
+				case 5: id = 18; break; // Swap Strength/Weakness
+				case 18: id = 5; break;
+				case 6: id = 7; break; // heal to harm
+				case 7: id = 6; break; // harm to heal
+				case 8: effAmp = -effAmp; break; // Jump Boost becomes Jump Penalty
+				case 9: id = 21; break; // Nasuea to health boost
+				case 21: id = 9; break;
+				case 12: id = 13; break; // Swap Fire Resist and Waterbreathing
+				case 13: id = 12; break;
+				case 19: id = 22; break; // Swap Poison / Absorb
+				case 22: id = 19; break;
+				case 16: id = 15; break; // Swap Blindness / Nightvision
+				case 15: id = 19; break;
+				case 11: effAmp = -effAmp-1; break; // Resist becomes negative resistance
+				case 14: id = 20; break; // Swap Wither/Invis
+				case 20: id = 14; break;
+				case 17: id = 23; break; // Swap Hunger/Saturation
+				case 23: id = 17; break; 
+			}
+		
+		if (modifier == 2) // Extend
+			effDur *= 2;
+		
+		PotionEffect modEffect = new PotionEffect(id, effDur, effAmp, ambient);
+		modEffect.writeCustomPotionEffectToNBT(efTag);
+		customEffects.appendTag(efTag);
+		comp.setTag("CustomPotionEffects", customEffects);
+		
+		stack.setTagCompound(comp);
+		
+		if (modifier == 4) // Splash
+			stack.setItemDamage(16400);
+		
+		return stack;
+	}
+	
+	public static int getAmplifier(int id) {
+		switch (id) {
+			case 2: // Slow
+			case 4: // Fatigue
+			case 8: // Jump
+			case 17: // Hunger
+			case 18: // Weakness
+			case 21: // Health boost
+				return 1;
+		}
+		return 0;
+	}
+	
+	public static int getDuration(int id) {
+		// Tiers: 45s, 1.5m, 3m
+		switch(id) {
+			// Instant Health / Damage
+			case 6:
+			case 7:
+				return 1;
+			case 1: // Speed
+			case 2: // Slow
+			case 4: // Fatigue
+			case 8: // Jump 
+			case 9: // Nausea
+			case 11: // Regen
+			case 12: // Resistance
+			case 13: // Fire Resist
+			case 14: // Water breathing
+			case 15: // Blindness
+			case 16: // Night Vision 
+			case 17: // Hunger 
+			case 18: // Weakness
+				return 3600; // 3m
+			case 3: // Haste
+			case 5: // Strength
+			case 21: // Health Boost
+				return 1800; // 1.5m
+			case 10: // Regen
+			case 19: // Poison
+			case 20: // Wither
+			case 22: // Absorb
+				return 900;
+			case 23: // Saturation
+				return 10; // 5-Shanks
+		}
+		
+		return 1800;
+	}
+	
 	public static void initAssociation() {
 		Assocations.put(Aspect.HUNGER, Potion.hunger);
 		Assocations.put(Aspect.DEATH, Potion.potionTypes[20]); // Wither
@@ -65,7 +317,7 @@ public class ArcanePotion extends ItemPotion {
 		Assocations.put(Aspect.TRAP, Potion.moveSlowdown);
 		Assocations.put(Aspect.POISON, Potion.poison);
 		Assocations.put(Aspect.HEAL, Potion.regeneration);
-		Assocations.put(Aspect.MAN, Potion.potionTypes[23]); // Saturation
+		Assocations.put(Aspect.FLESH, Potion.potionTypes[23]); // Saturation
 		Assocations.put(Aspect.LIFE, Potion.heal);
 		Assocations.put(Aspect.MOTION, Potion.moveSpeed);
 		Assocations.put(Aspect.MINE, Potion.digSpeed);
@@ -212,28 +464,10 @@ public class ArcanePotion extends ItemPotion {
 		
 		ItemStack is = new ItemStack(EssentialAlchemy.ArcanePotion, 1, 16);
 		NBTTagCompound tag = null;
-		int amp = 0;
-		int dur = 1200;
-		
-		// Handle cases where the default duration should be longer
-		switch (effectID) {
-			case 1: // Speed
-			case 2: // Slowness
-			case 4: // Fatigue
-			case 8: // Jump
-			case 9: // Nausea
-			case 11: // Resistance
-			case 12: // Fire Resist
-			case 15: // Blindness
-			case 16: // Night Vision
-			case 17: // Hunger
-			case 21: // Health Boost
-				dur *= 2; // 2m
-		}
 		
 		String json = "{CustomPotionEffects:[";
 		//json += "{Id:"+effectID+",Amplifier:"+amp+",Duration:"+dur+"}";
-		json += effectToJSON(new PotionEffect(effectID, dur, amp));
+		json += effectToJSON(new PotionEffect(effectID, getDuration(effectID), getAmplifier(effectID)));
 		
 		json += "]}";
 		

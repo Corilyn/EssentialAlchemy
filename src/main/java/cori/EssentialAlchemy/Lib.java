@@ -27,30 +27,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public final class Lib {
+	
+	
 	// After much digging, turns out you can just use the Piston-method to determine facing
 	public static ForgeDirection getDir(EntityLivingBase eb, int x, int y, int z) {
-		//ForgeDirection heading = ForgeDirection.UP;
-		
 		return ForgeDirection.getOrientation(BlockPistonBase.determineOrientation(eb.worldObj, x, y, z, eb));
-		
-		/*float pitch = eb.rotationPitch;
-		
-		
-		int yaw = (int)eb.rotationYaw;
-		yaw += 360; yaw+=22; yaw%=360;
-		int facing = yaw/90;
-		switch(facing) {
-			case 0 :
-				return ForgeDirection.SOUTH;
-			case 1 : 
-				return ForgeDirection.WEST;
-			case 2 :
-				return ForgeDirection.NORTH;
-			case 3 :
-				return ForgeDirection.EAST;
-		}
-		
-		return ForgeDirection.UNKNOWN;*/
 	}
 	
 	public static int getDirInt(EntityLivingBase eb, int x, int y, int z) {
