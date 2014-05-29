@@ -11,7 +11,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import cori.EssentialAlchemy.EssentialAlchemy;
-import cori.EssentialAlchemy.tile.TileEffectStone;
 
 public class BiteStone extends EffectBlock {
 

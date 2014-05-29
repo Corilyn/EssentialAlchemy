@@ -18,7 +18,6 @@ import thaumcraft.api.aspects.Aspect;
 import cori.EssentialAlchemy.EssentialAlchemy;
 import cori.EssentialAlchemy.ITickedByTile;
 import cori.EssentialAlchemy.Lib;
-import cori.EssentialAlchemy.tile.TileEffectStone;
 
 public class SuctionStone extends EffectBlock implements ITickedByTile {
 

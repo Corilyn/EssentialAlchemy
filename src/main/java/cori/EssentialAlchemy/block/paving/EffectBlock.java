@@ -25,7 +25,6 @@ import cori.EssentialAlchemy.EssentialAlchemy;
 import cori.EssentialAlchemy.KeyLib;
 import cori.EssentialAlchemy.Lib;
 import cori.EssentialAlchemy.client.ClientProxy;
-import cori.EssentialAlchemy.tile.TileEffectStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

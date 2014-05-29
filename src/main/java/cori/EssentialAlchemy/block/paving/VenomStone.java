@@ -7,7 +7,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import thaumcraft.api.aspects.Aspect;
-import cori.EssentialAlchemy.tile.TileEffectStone;
 
 public class VenomStone extends EffectBlock {
 

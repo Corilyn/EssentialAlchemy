@@ -1,4 +1,4 @@
-package cori.EssentialAlchemy.tile;
+package cori.EssentialAlchemy.block.paving;
 
 import java.util.Random;
 
@@ -13,6 +13,7 @@ import thaumcraft.api.aspects.IEssentiaTransport;
 import cori.EssentialAlchemy.EssentialAlchemy;
 import cori.EssentialAlchemy.IChargedTile;
 import cori.EssentialAlchemy.ITickedByTile;
+import cori.EssentialAlchemy.tile.BaseTile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;

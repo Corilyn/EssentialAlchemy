@@ -16,7 +16,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import cori.EssentialAlchemy.EssentialAlchemy;
 import cori.EssentialAlchemy.ITickedByTile;
-import cori.EssentialAlchemy.tile.TileEffectStone;
 
 public class BindStone extends EffectBlock implements ITickedByTile {
 

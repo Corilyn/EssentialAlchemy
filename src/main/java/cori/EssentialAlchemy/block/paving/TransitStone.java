@@ -11,7 +11,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import thaumcraft.api.aspects.Aspect;
-import cori.EssentialAlchemy.tile.TileEffectStone;
 
 public class TransitStone extends EffectBlock {
 

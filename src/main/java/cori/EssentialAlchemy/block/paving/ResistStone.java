@@ -8,7 +8,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.IAspectContainer;
-import cori.EssentialAlchemy.tile.TileEffectStone;
 
 public class ResistStone extends EffectBlock {
 
