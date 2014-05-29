@@ -1,11 +1,11 @@
 ﻿# -- Items
-ES.mouseoverArcanePotion=Essence Potion
+ES.mouseoverArcanePotion=§6Essence Potion§f
 
 # -- Potions
 ES.name.ESBREW_GELUM=Gelum Brewing
 ES.lore.ESBREW_GELUM=Fire Resistance
-ES.name.ESBREW_HUMANUS=HumanUs Brewing
-ES.lore.ESBREW_HUMANUS=Saturation
+ES.name.ESBREW_CORPUS=Corpus Brewing
+ES.lore.ESBREW_CORPUS=Saturation
 ES.name.ESBREW_VOLATUS=Volatus Brewing
 ES.lore.ESBREW_VOLATUS=Jump Boost
 ES.name.ESBREW_TENEBRAE=Tenebrae Brewing
@@ -49,6 +49,15 @@ ES.lore.ESBREW_EXANIMIS=Weakness
 ES.name.ESBREW_SPIRITUS=Spiritus Brewing
 ES.lore.ESBREW_SPIRITUS=Fatigue
 
+ES.brew=Brew
+
+potion.potency.5=VI
+potion.potency.6=VII
+potion.potency.7=VIII
+potion.potency.8=IX
+potion.potency.9=X
+potion.potency.10=XI
+
 # --- Category
 tc.research_category.ESSALC=Essential Alchemy
 
@@ -65,6 +74,11 @@ tile.VenomStone.name=Paving Stone of Poison
 tile.BindStone.name=Paving Stone of Binding
 tile.BiteStone.name=Paving Stone of Biting
 tile.HealthStone.name=Paving Stone of Vitality
+
+tile.PotionModifier.name=Potion Infuser
+
+# --- Misc
+ES.container.modifier=Potion Infuser
 
 # --- Research
 
