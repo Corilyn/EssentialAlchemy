@@ -42,7 +42,7 @@ public class CrystalFocusBlockRender implements ISimpleBlockRenderingHandler {
 			Block block, int modelId, RenderBlocks r) {
 		
 		//renderer.renderStandardBlock(block, x, y, z);
-		
+		r.renderAllFaces = true;
 		int meta = world.getBlockMetadata(x, y, z);
 		Lib.rotateUV(meta, r);
 		setupVentFace(meta, r);
@@ -50,6 +50,7 @@ public class CrystalFocusBlockRender implements ISimpleBlockRenderingHandler {
 		setupVentBody(meta, r);
 		r.renderStandardBlock(block, x, y, z);
 		Lib.unrotateUV(r);
+		r.renderAllFaces = false;
 		
 		return true;
 	}
