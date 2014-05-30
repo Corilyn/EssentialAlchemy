@@ -1,6 +1,9 @@
 package cori.EssentialAlchemy;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
@@ -16,6 +19,7 @@ import net.minecraft.block.BlockPistonBase;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -36,6 +40,26 @@ public final class Lib {
 	
 	public static int getDirInt(EntityLivingBase eb, int x, int y, int z) {
 		return BlockPistonBase.determineOrientation(eb.worldObj, x, y, z, eb);
+	}
+	
+	private static Method getBaubles;
+	public static ItemStack[] playerBaubles(EntityPlayer p) {
+		try {
+			List<ItemStack> baubles = new ArrayList();
+			if (getBaubles == null) {
+				Class rfl = Class.forName("baubles.common.lib.PlayerHandler");
+				getBaubles = rfl.getMethod("getPlayerBaubles", EntityPlayer.class);
+			}
+			IInventory inventoryBaubles = (IInventory) getBaubles.invoke(null, p);
+			for(int i = 0; i < inventoryBaubles.getSizeInventory(); ++i) 
+				baubles.add(inventoryBaubles.getStackInSlot(i));
+			
+			return baubles.toArray(new ItemStack[baubles.size()]);
+		} catch (Exception e) {
+			EssentialAlchemy.lg.warn("Error mapping baubles");
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	private static Method insertStack;

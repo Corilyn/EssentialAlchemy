@@ -1,5 +1,6 @@
 package cori.EssentialAlchemy.potions;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Dictionary;
@@ -12,7 +13,9 @@ import java.util.Set;
 import cori.EssentialAlchemy.EssentialAlchemy;
 import cori.EssentialAlchemy.EssentialResearchItem;
 import cori.EssentialAlchemy.KeyLib;
+import cori.EssentialAlchemy.Lib;
 import cori.EssentialAlchemy.Research;
+import cori.EssentialAlchemy.baubles.AlchemyAmulet;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -21,6 +24,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.command.CommandGive;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -39,9 +43,11 @@ import net.minecraft.world.World;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.aspects.AspectSourceHelper;
 import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
+import thaumcraft.common.lib.research.ResearchManager;
 
 public class ArcanePotion extends ItemPotion {
 	//public Aspect Type;
@@ -55,18 +61,92 @@ public class ArcanePotion extends ItemPotion {
 		setCreativeTab(EssentialAlchemy.thaumTab);
 	}
 	
-	boolean shouldConsume(EntityPlayer p) {
-		return true;
+	ItemStack getAmulet(EntityPlayer p) {
+		ItemStack[] stacks = Lib.playerBaubles(p);
+		if (stacks == null || stacks.length < 1)
+			return null;
+		
+		for(ItemStack slot : stacks) {
+			if (slot == null) continue;
+			if (slot.getItem() == null) continue;
+		
+			if (slot.getItem() == EssentialAlchemy.alchemyAmulet)
+				return slot;
+		}
+			
+		return null;
+	}
+	
+	boolean shouldConsume(EntityPlayer p, ItemStack stack, boolean reallyDo) {
+		ItemStack amulet = getAmulet(p);
+		if (amulet == null) return true;
+		
+		//EssentialAlchemy.lg.warn("Checking anti-consumption");
+		
+		AspectList held = AlchemyAmulet.getAspectList(amulet);
+		AspectList req = getValue(stack);
+		
+		// Insufficient
+		for(Aspect a : req.getAspects())
+			if (held.getAmount(a) < req.getAmount(a)) {
+				return true; 
+			}
+		if (!reallyDo) return false;
+		
+		//EssentialAlchemy.lg.warn("Reducing aspects and not consuming potion");
+		// Actually reduce and preserve
+		for(Aspect a : req.getAspects())
+			held.reduce(a, req.getAmount(a));
+		
+		AlchemyAmulet.setAspectList(amulet, held);
+		
+		return false;
 	}
 	
 	ItemStack modifyPreConsume(EntityPlayer p, ItemStack stack) {
 		return stack;
 	}
 	
+	// Get value, in wand vis, for deduction level from the alchemist amulet
+	AspectList getValue(ItemStack stack) {
+		AspectList al = new AspectList();
+		
+		PotionEffect pe = (PotionEffect) getEffects(stack).get(0); // Judge off first
+		
+		int id = pe.getPotionID();
+		int complexity = 0;
+		
+		int ampLevel = pe.getAmplifier();
+		int baseAmp = getAmplifier(id);
+		
+		if (ampLevel > baseAmp) ++complexity;
+		if (ampLevel > (baseAmp)+2) ++complexity;
+		if (ampLevel > (baseAmp)+3) ++complexity;
+		
+		int durLevel = pe.getDuration();
+		int baseDir = getDuration(id);
+		
+		if (durLevel > baseDir) ++complexity;
+		if (durLevel > baseDir * 3) ++complexity;
+		if (durLevel > baseDir * 5) ++complexity;
+		
+		if (isSplash(stack.getItemDamage())) ++complexity;
+		
+		int[] costs = new int[] { 8, 8, 16, 24, 32, 48, 64, 96, 96, 96 };
+		
+		//float ampCost = getAmplifier(id)+1; ampCost *= ampCost; // Exponent
+		//float durCost = pe.getDuration() / (float)getDuration(id); durCost *= durCost;
+		al.add(ReverseAssocations.get(id), costs[complexity] * 100);
+		
+		//if (isSplash(stack.getItemDamage())) al.add(Aspect.ENTROPY, 400);
+		
+		return ResearchManager.reduceToPrimals(al);
+	}
+	
 	@Override
 	public ItemStack onEaten(ItemStack stack, World w,
 			EntityPlayer player) {
-		if (!player.capabilities.isCreativeMode && shouldConsume(player))
+		if (!player.capabilities.isCreativeMode && shouldConsume(player,stack,true))
 			--stack.stackSize;
 
 		if (!w.isRemote)
@@ -94,6 +174,28 @@ public class ArcanePotion extends ItemPotion {
 		}
 
 		return stack;
+	}
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World w,
+			EntityPlayer p) {
+		if (isSplash(stack.getItemDamage()))
+		{
+			if (!p.capabilities.isCreativeMode && shouldConsume(p, stack, true))
+				--stack.stackSize;
+
+			w.playSoundAtEntity(p, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+
+			if (!w.isRemote)
+				w.spawnEntityInWorld(new EntityPotion(w, p, stack));
+
+			return stack;
+		}
+		else
+		{
+			p.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+			return stack;
+		}
 	}
 	
 	// 0 - Amplify (0x1)
@@ -491,9 +593,26 @@ public class ArcanePotion extends ItemPotion {
 	// Denote that this is was an Essential Alchemy potion
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack par1ItemStack,
-			EntityPlayer par2EntityPlayer, List extraLines, boolean par4) {
+	public void addInformation(ItemStack stack,
+			EntityPlayer p, List extraLines, boolean par4) {
 		extraLines.add(StatCollector.translateToLocal("ES.mouseoverArcanePotion"));
-		super.addInformation(par1ItemStack, par2EntityPlayer, extraLines, par4);
+		super.addInformation(stack, p, extraLines, par4);
+		
+		if (getAmulet(p) != null) {
+			extraLines.add(StatCollector.translateToLocal("ES.dupePotion"));
+			
+			AspectList value = getValue(stack);
+			DecimalFormat format = new DecimalFormat("#####.##");
+			
+			for (Aspect a : Aspect.getPrimalAspects()) {
+				String ln = format.format(value.getAmount(a)/100F); 
+				extraLines.add("  §" + a.getChatcolor() + a.getName() + "§r x " + ln);
+			}
+			
+			if (shouldConsume(p, stack, false)) {
+				extraLines.add(StatCollector.translateToLocal("ES.insufficient"));
+			}
+			//+ getValue(stack).visSize() / 100 + " Vis");
+		}
 	}
 }

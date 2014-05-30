@@ -1,5 +1,8 @@
 ﻿# -- Items
 ES.mouseoverArcanePotion=§6Essence Potion§f
+item.AlchemyAmulet.name=§6Alchemist's Amulet
+ES.dupePotion=§6Preservation Cost: 
+ES.insufficint=§4Insufficient Vis!
 
 # -- Potions
 ES.name.ESBREW_GELUM=Gelum Brewing

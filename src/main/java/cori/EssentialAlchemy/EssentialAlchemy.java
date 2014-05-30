@@ -50,7 +50,7 @@ public class EssentialAlchemy
     	ProtectStone, RegenStone, TransitStone, ColdStone, 
     	SuckStone, VenomStone, BindStone, BiteStone, HealthStone;
     public static Block PotionModifier;
-	public static Item ArcanePotion;
+	public static Item ArcanePotion, alchemyAmulet;
     
 	public static final PacketHandler packetPipe = new PacketHandler();
 	

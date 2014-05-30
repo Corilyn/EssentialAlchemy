@@ -28,7 +28,7 @@ public class Research {
 	
 	public static HashMap recipes = new HashMap();
 	
-	static AspectList ofPrimals(int air, int earth, int fire, int water, int order, int entropy) {
+	public static AspectList ofPrimals(int air, int earth, int fire, int water, int order, int entropy) {
 		AspectList al = new AspectList();
 		if (air > 0) 	al.add(Aspect.AIR, air);
 		if (earth > 0) 	al.add(Aspect.EARTH, earth);

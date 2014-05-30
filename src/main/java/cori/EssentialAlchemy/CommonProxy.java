@@ -7,6 +7,7 @@ import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.world.World;
+import cori.EssentialAlchemy.baubles.AlchemyAmulet;
 import cori.EssentialAlchemy.block.*;
 import cori.EssentialAlchemy.block.paving.*;
 
@@ -23,6 +24,9 @@ public class CommonProxy {
 	}
 	
 	public void RegisterBlocks() {
+		EssentialAlchemy.alchemyAmulet = new AlchemyAmulet();
+		GameRegistry.registerItem(EssentialAlchemy.alchemyAmulet, "AlchemyAmulet");
+		
 		GameRegistry.registerTileEntity(TileEffectStone.class, "TileStoneBuff");
 		GameRegistry.registerTileEntity(TileCrystalFocus.class,"TileCrystalFocus");
 		GameRegistry.registerTileEntity(TilePotionModifier.class, "TilePotionModifier");
